@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel Admin</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="admin">
+
+
+<div id="login" class="box">
+
+
+<h1>🔐 Admin</h1>
+
+
+<input 
+id="senha"
+type="password"
+placeholder="Senha de acesso"
+>
+
+
+<button onclick="entrar()">
+Entrar
+</button>
+
+
+</div>
+
+
+
+
+
+<div id="painel" class="box" style="display:none;">
+
+
+<h1>🛒 Produtos</h1>
+
+
+
+<input id="nome" placeholder="Nome do produto">
+
+
+<input id="imagem" placeholder="Link da imagem">
+
+
+<textarea id="descricao" placeholder="Descrição"></textarea>
+
+
+<input id="preco" placeholder="Preço">
+
+
+<input id="whatsapp" placeholder="WhatsApp para venda">
+
+
+
+<button onclick="salvarProduto()">
+
+Adicionar produto
+
+</button>
+
+
+
+<h2>Produtos cadastrados</h2>
+
+
+<div id="lista"></div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script src="js/banco.js"></script>
+
+<script src="js/admin.js"></script>
+
+
+</body>
+
+</html>
