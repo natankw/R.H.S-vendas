@@ -5,7 +5,10 @@ let editando = null;
 
 function login(){
 
-    const senha = document.getElementById("senha").value;
+
+    const senha =
+    document.getElementById("senha").value;
+
 
 
     if(senha === SENHA_ADMIN){
@@ -14,15 +17,18 @@ function login(){
         logado = true;
 
 
+
         document.getElementById("loginBox").style.display="none";
+
 
         document.getElementById("painel").style.display="block";
 
 
-        listar();
 
+        listarProdutosAdmin();
 
-        listarPedidos();
+        listarPedidosAdmin();
+
 
 
     }else{
@@ -32,6 +38,7 @@ function login(){
 
 
     }
+
 
 }
 
@@ -49,22 +56,37 @@ function salvar(){
     const produto = {
 
 
-        nome: document.getElementById("nome").value,
+        nome:
+        document.getElementById("nome").value,
 
-        imagem: document.getElementById("imagem").value,
 
-        categoria: document.getElementById("categoria").value,
+        imagem:
+        document.getElementById("imagem").value,
 
-        descricao: document.getElementById("descricao").value,
 
-        preco: document.getElementById("preco").value,
+        categoria:
+        document.getElementById("categoria").value,
 
-        tipo: document.getElementById("tipo").value,
 
-        entrega: document.getElementById("entrega").value
+        descricao:
+        document.getElementById("descricao").value,
+
+
+        preco:
+        document.getElementById("preco").value,
+
+
+        tipo:
+        document.getElementById("tipo").value,
+
+
+        entrega:
+        document.getElementById("entrega").value
+
 
 
     };
+
 
 
 
@@ -88,13 +110,15 @@ function salvar(){
 
 
 
+
     alert("✅ Produto salvo");
+
 
 
     limpar();
 
 
-    listar();
+    listarProdutosAdmin();
 
 
 
@@ -104,13 +128,18 @@ function salvar(){
 
 
 
-function listar(){
 
 
-    const area = document.getElementById("lista");
+
+function listarProdutosAdmin(){
 
 
-    if(!area) return;
+    const area =
+    document.getElementById("lista");
+
+
+
+    if(!area)return;
 
 
 
@@ -119,6 +148,7 @@ function listar(){
 
 
     listarProdutos().forEach(produto=>{
+
 
 
         area.innerHTML += `
@@ -130,7 +160,9 @@ function listar(){
         <img src="${produto.imagem}" class="thumb">
 
 
-        <h3>${produto.nome}</h3>
+        <h3>
+        ${produto.nome}
+        </h3>
 
 
         <p>
@@ -138,9 +170,15 @@ function listar(){
         </p>
 
 
+        <p>
+        ${produto.categoria}
+        </p>
+
+
+
         <a href="produto.html?id=${produto.id}" target="_blank">
 
-        🔗 Ver produto
+        🔗 Ver página
 
         </a>
 
@@ -148,11 +186,13 @@ function listar(){
         <br><br>
 
 
+
         <button onclick="editar(${produto.id})">
 
         ✏️ Editar
 
         </button>
+
 
 
         <button onclick="deletar(${produto.id})">
@@ -165,10 +205,12 @@ function listar(){
         </div>
 
 
+
         `;
 
 
     });
+
 
 
 }
@@ -182,26 +224,28 @@ function listar(){
 function editar(id){
 
 
-    const produto = buscarProduto(id);
+    const produto =
+    buscarProduto(id);
+
 
 
     if(!produto)return;
 
 
 
-    document.getElementById("nome").value=produto.nome;
+    document.getElementById("nome").value = produto.nome;
 
-    document.getElementById("imagem").value=produto.imagem;
+    document.getElementById("imagem").value = produto.imagem;
 
-    document.getElementById("categoria").value=produto.categoria;
+    document.getElementById("categoria").value = produto.categoria;
 
-    document.getElementById("descricao").value=produto.descricao;
+    document.getElementById("descricao").value = produto.descricao;
 
-    document.getElementById("preco").value=produto.preco;
+    document.getElementById("preco").value = produto.preco;
 
-    document.getElementById("tipo").value=produto.tipo;
+    document.getElementById("tipo").value = produto.tipo;
 
-    document.getElementById("entrega").value=produto.entrega;
+    document.getElementById("entrega").value = produto.entrega;
 
 
 
@@ -225,10 +269,11 @@ function deletar(id){
         excluirProduto(id);
 
 
-        listar();
+        listarProdutosAdmin();
 
 
     }
+
 
 }
 
@@ -237,13 +282,22 @@ function deletar(id){
 
 
 
-function listarPedidos(){
 
 
-    const area = document.getElementById("pedidos");
+function listarPedidosAdmin(){
+
+
+    const area =
+    document.getElementById("pedidos");
+
 
 
     if(!area)return;
+
+
+
+    const pedidos =
+    pegarPedidos();
 
 
 
@@ -251,7 +305,23 @@ function listarPedidos(){
 
 
 
-    listarPedidos().forEach(pedido=>{
+    if(pedidos.length === 0){
+
+
+        area.innerHTML =
+        "<p>Nenhum pedido ainda.</p>";
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    pedidos.forEach(pedido=>{
 
 
         area.innerHTML += `
@@ -281,10 +351,13 @@ function listarPedidos(){
         `;
 
 
+
     });
 
 
+
 }
+
 
 
 
@@ -295,9 +368,13 @@ function listarPedidos(){
 function limpar(){
 
 
-    document.querySelectorAll("input, textarea")
+    document
+    .querySelectorAll("input, textarea")
+    .forEach(campo=>{
 
-    .forEach(e=>e.value="");
+        campo.value="";
+
+    });
 
 
-}
+        }
