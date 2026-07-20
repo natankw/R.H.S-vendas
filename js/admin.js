@@ -378,3 +378,39 @@ function limpar(){
 
 
         }
+
+function entregue(id){
+
+
+    let pedidos = pegarPedidos();
+
+
+    let pedido = pedidos.find(
+    p=>p.id == id
+    );
+
+
+    if(pedido){
+
+
+        pedido.status="Entregue";
+
+
+        localStorage.setItem(
+        "pedidos",
+        JSON.stringify(pedidos)
+        );
+
+
+        alert(
+        "✅ Pedido atualizado"
+        );
+
+
+        listarPedidosAdmin();
+
+
+    }
+
+
+}
