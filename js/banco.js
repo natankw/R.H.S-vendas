@@ -39,7 +39,7 @@ return produtos;
 function buscarProduto(id){
 
 return produtos.find(
-p=>p.id==id
+p=>p.id == id
 );
 
 }
@@ -62,22 +62,20 @@ salvar();
 
 
 
-
 function editarProduto(id,dados){
 
-let p = buscarProduto(id);
+let produto = buscarProduto(id);
 
 
-if(p){
+if(produto){
 
-Object.assign(p,dados);
+Object.assign(produto,dados);
 
 salvar();
 
 }
 
 }
-
 
 
 
@@ -85,9 +83,22 @@ function excluirProduto(id){
 
 produtos =
 produtos.filter(
-p=>p.id!=id
+p=>p.id != id
 );
 
+salvar();
+
+}
+
+
+
+function criarPedido(pedido){
+
+pedido.id = Date.now();
+
+pedido.status="Pendente";
+
+pedidos.push(pedido);
 
 salvar();
 
@@ -95,25 +106,7 @@ salvar();
 
 
 
-
-
-function criarPedido(dados){
-
-dados.id=Date.now();
-
-dados.status="Pendente";
-
-
-pedidos.push(dados);
-
-
-salvar();
-
-}
-
-
-
-function listarPedidos(){
+function pegarPedidos(){
 
 return pedidos;
 
