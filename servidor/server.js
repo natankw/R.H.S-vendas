@@ -11,37 +11,91 @@ app.use(express.json());
 
 
 
-// teste do servidor
+
 
 app.get("/", (req,res)=>{
 
-    res.json({
-        status:"Servidor online"
-    });
-
-});
-
-
-
-// criar pagamento (vamos ativar depois)
-
-app.post("/criar-pagamento",(req,res)=>{
-
-
-    const produto = req.body;
-
-
 
     res.json({
 
-        mensagem:"Pagamento ainda não configurado",
+        online:true,
 
-        produto: produto
+        mensagem:
+        "Servidor da loja online"
 
     });
 
 
 });
+
+
+
+
+
+
+
+
+// Criar pedido
+
+app.post("/pedido",(req,res)=>{
+
+
+    const dados = req.body;
+
+
+
+    console.log(
+    "Novo pedido:",
+    dados
+    );
+
+
+
+    res.json({
+
+
+        sucesso:true,
+
+
+        mensagem:
+        "Pedido recebido"
+
+
+    });
+
+
+
+});
+
+
+
+
+
+
+
+
+// Pagamento (Mercado Pago será colocado depois)
+
+app.post("/pagamento",(req,res)=>{
+
+
+    res.json({
+
+
+        sucesso:false,
+
+
+        mensagem:
+        "Mercado Pago ainda não configurado"
+
+
+    });
+
+
+});
+
+
+
 
 
 
@@ -49,10 +103,14 @@ app.post("/criar-pagamento",(req,res)=>{
 const PORT = 3000;
 
 
+
 app.listen(PORT,()=>{
 
+
     console.log(
-        "Servidor rodando na porta "+PORT
+    "Servidor rodando na porta "
+    +PORT
     );
+
 
 });
