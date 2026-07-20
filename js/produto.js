@@ -80,7 +80,6 @@ if(!produto){
 
 
 
-
         <button onclick="comprar()">
 
         🛒 Comprar agora
@@ -107,16 +106,55 @@ if(!produto){
 function comprar(){
 
 
+    const cliente = prompt(
+        "Digite seu nome:"
+    );
+
+
+
+    const whatsapp = prompt(
+        "Digite seu WhatsApp com DDD:"
+    );
+
+
+
+
+    if(!cliente || !whatsapp){
+
+
+        alert(
+        "❌ Preencha todos os dados"
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
     const pedido = {
+
+
+        id: Date.now(),
 
 
         produtoId: produto.id,
 
 
-        nome: produto.nome,
+        produto: produto.nome,
 
 
         preco: produto.preco,
+
+
+        cliente: cliente,
+
+
+        whatsapp: whatsapp,
 
 
         data:
@@ -140,9 +178,8 @@ function comprar(){
 
 
     alert(
-    "✅ Pedido criado! Aguarde a confirmação."
+    "✅ Pedido enviado com sucesso!"
     );
-
 
 
 }
