@@ -1,14 +1,11 @@
 let logado = false;
-
 let editando = null;
 
 
 
 function login(){
 
-
     const senha = document.getElementById("senha").value;
-
 
 
     if(senha === SENHA_ADMIN){
@@ -19,11 +16,13 @@ function login(){
 
         document.getElementById("loginBox").style.display="none";
 
-
         document.getElementById("painel").style.display="block";
 
 
         listar();
+
+
+        listarPedidos();
 
 
     }else{
@@ -35,8 +34,6 @@ function login(){
     }
 
 }
-
-
 
 
 
@@ -54,24 +51,17 @@ function salvar(){
 
         nome: document.getElementById("nome").value,
 
-
         imagem: document.getElementById("imagem").value,
-
 
         categoria: document.getElementById("categoria").value,
 
-
         descricao: document.getElementById("descricao").value,
-
 
         preco: document.getElementById("preco").value,
 
-
         tipo: document.getElementById("tipo").value,
 
-
         entrega: document.getElementById("entrega").value
-
 
 
     };
@@ -79,15 +69,13 @@ function salvar(){
 
 
 
-
     if(editando){
 
 
-        editarProduto(editando, produto);
+        editarProduto(editando,produto);
 
 
-        editando = null;
-
+        editando=null;
 
 
     }else{
@@ -100,7 +88,6 @@ function salvar(){
 
 
 
-
     alert("✅ Produto salvo");
 
 
@@ -110,10 +97,8 @@ function salvar(){
     listar();
 
 
+
 }
-
-
-
 
 
 
@@ -133,14 +118,10 @@ function listar(){
 
 
 
-
-
     listarProdutos().forEach(produto=>{
 
 
-
         area.innerHTML += `
-
 
 
         <div class="card">
@@ -149,16 +130,12 @@ function listar(){
         <img src="${produto.imagem}" class="thumb">
 
 
-
         <h3>${produto.nome}</h3>
 
 
-
-        <p>${produto.categoria}</p>
-
-
-        <p>💰 R$ ${produto.preco}</p>
-
+        <p>
+        💰 R$ ${produto.preco}
+        </p>
 
 
         <a href="produto.html?id=${produto.id}" target="_blank">
@@ -168,9 +145,7 @@ function listar(){
         </a>
 
 
-
         <br><br>
-
 
 
         <button onclick="editar(${produto.id})">
@@ -180,8 +155,6 @@ function listar(){
         </button>
 
 
-
-
         <button onclick="deletar(${produto.id})">
 
         🗑 Excluir
@@ -189,13 +162,10 @@ function listar(){
         </button>
 
 
-
         </div>
 
 
-
         `;
-
 
 
     });
@@ -209,36 +179,29 @@ function listar(){
 
 
 
-
 function editar(id){
 
 
     const produto = buscarProduto(id);
 
 
-    if(!produto) return;
+    if(!produto)return;
 
 
 
-    document.getElementById("nome").value = produto.nome;
+    document.getElementById("nome").value=produto.nome;
 
+    document.getElementById("imagem").value=produto.imagem;
 
-    document.getElementById("imagem").value = produto.imagem;
+    document.getElementById("categoria").value=produto.categoria;
 
+    document.getElementById("descricao").value=produto.descricao;
 
-    document.getElementById("categoria").value = produto.categoria;
+    document.getElementById("preco").value=produto.preco;
 
+    document.getElementById("tipo").value=produto.tipo;
 
-    document.getElementById("descricao").value = produto.descricao;
-
-
-    document.getElementById("preco").value = produto.preco;
-
-
-    document.getElementById("tipo").value = produto.tipo;
-
-
-    document.getElementById("entrega").value = produto.entrega;
+    document.getElementById("entrega").value=produto.entrega;
 
 
 
@@ -267,9 +230,61 @@ function deletar(id){
 
     }
 
-
 }
 
+
+
+
+
+
+function listarPedidos(){
+
+
+    const area = document.getElementById("pedidos");
+
+
+    if(!area)return;
+
+
+
+    area.innerHTML="";
+
+
+
+    listarPedidos().forEach(pedido=>{
+
+
+        area.innerHTML += `
+
+
+        <div class="card">
+
+
+        <h3>
+        🛒 ${pedido.nome}
+        </h3>
+
+
+        <p>
+        💰 R$ ${pedido.preco}
+        </p>
+
+
+        <p>
+        Status: ${pedido.status}
+        </p>
+
+
+        </div>
+
+
+        `;
+
+
+    });
+
+
+}
 
 
 
@@ -282,7 +297,7 @@ function limpar(){
 
     document.querySelectorAll("input, textarea")
 
-    .forEach(campo=>campo.value="");
+    .forEach(e=>e.value="");
 
 
 }
