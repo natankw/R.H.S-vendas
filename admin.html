@@ -19,21 +19,27 @@
 <div class="admin">
 
 
+
 <div id="loginBox" class="box">
 
 
-<h1>🔐 Área Admin</h1>
+<h1>🔐 Painel Admin</h1>
+
+
+<p>Acesso do proprietário</p>
 
 
 <input 
 id="senha"
 type="password"
-placeholder="Senha"
+placeholder="Senha de acesso"
 >
 
 
 <button onclick="login()">
+
 Entrar
+
 </button>
 
 
@@ -46,14 +52,26 @@ Entrar
 <div id="painel" class="box" style="display:none;">
 
 
-<h1>🛒 Gerenciar Produtos</h1>
+
+<h1>🛒 Gerenciar Loja</h1>
 
 
 
-<input id="nome" placeholder="Nome do produto">
+<h2>➕ Novo Produto</h2>
 
 
-<input id="imagem" placeholder="Link da imagem">
+
+<input 
+id="nome"
+placeholder="Nome do produto"
+>
+
+
+
+<input 
+id="imagem"
+placeholder="Link da imagem"
+>
 
 
 
@@ -84,10 +102,12 @@ placeholder="Descrição do produto">
 
 
 
+
 <input 
 id="preco"
-placeholder="Preço exemplo: 10.00"
+placeholder="Preço (ex: 10.00)"
 >
+
 
 
 
@@ -113,33 +133,60 @@ Serviço
 
 <input 
 id="entrega"
-placeholder="Entrega (link, instrução ou manual)"
+placeholder="Forma de entrega"
 >
-
 
 
 
 
 <button onclick="salvar()">
 
-➕ Adicionar produto
+💾 Salvar Produto
 
 </button>
 
 
 
 
-<h2>Produtos cadastrados</h2>
+
+
+<hr>
+
+
+
+
+<h2>📦 Produtos cadastrados</h2>
 
 
 <div id="lista"></div>
 
 
 
+
+
+
+<hr>
+
+
+
+
+
+<h2>🛒 Pedidos</h2>
+
+
+<div id="pedidos"></div>
+
+
+
+
+
 </div>
 
 
+
 </div>
+
+
 
 
 
@@ -147,6 +194,7 @@ placeholder="Entrega (link, instrução ou manual)"
 <script src="js/banco.js"></script>
 
 <script src="js/admin.js"></script>
+
 
 
 </body>
