@@ -1,0 +1,302 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+
+body{
+
+    background:#000;
+
+    color:white;
+
+    min-height:100vh;
+
+    padding:20px;
+
+}
+
+
+
+.topo{
+
+    text-align:center;
+
+    padding:40px 10px;
+
+}
+
+
+
+.topo h1{
+
+    font-size:40px;
+
+    color:red;
+
+    text-shadow:0 0 20px red;
+
+}
+
+
+
+.topo p{
+
+    color:#ccc;
+
+}
+
+
+
+
+
+.pesquisa{
+
+    text-align:center;
+
+    margin:20px;
+
+}
+
+
+
+input,
+textarea,
+select{
+
+
+    width:90%;
+
+    max-width:500px;
+
+    padding:15px;
+
+    margin:8px;
+
+    border-radius:15px;
+
+    border:1px solid red;
+
+    background:#111;
+
+    color:white;
+
+
+}
+
+
+
+
+button{
+
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    box-shadow:0 0 20px red;
+
+    transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+
+#produtos,
+#lista{
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(250px,1fr));
+
+
+    gap:20px;
+
+    max-width:1200px;
+
+    margin:auto;
+
+
+}
+
+
+
+
+
+.card{
+
+
+    background:
+
+    rgba(255,0,0,0.08);
+
+
+    border:1px solid red;
+
+
+    border-radius:20px;
+
+
+    padding:20px;
+
+
+    backdrop-filter:blur(10px);
+
+
+    box-shadow:
+
+    0 0 20px rgba(255,0,0,.3);
+
+
+}
+
+
+
+
+
+.thumb{
+
+
+    width:100%;
+
+    height:200px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+
+}
+
+
+
+
+
+.card h2,
+.card h1{
+
+
+    margin:10px 0;
+
+}
+
+
+
+.card p{
+
+
+    color:#ddd;
+
+    margin:10px 0;
+
+
+}
+
+
+
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+
+
+
+.admin{
+
+
+    max-width:600px;
+
+    margin:30px auto;
+
+
+}
+
+
+
+
+
+.box{
+
+
+    background:#080808;
+
+
+    border:1px solid red;
+
+
+    border-radius:20px;
+
+
+    padding:25px;
+
+
+    box-shadow:0 0 25px red;
+
+
+}
+
+
+
+
+
+
+.produto{
+
+
+    max-width:600px;
+
+    margin:40px auto;
+
+}
+
+
+
+
+
+@media(max-width:600px){
+
+
+.topo h1{
+
+    font-size:30px;
+
+}
+
+
+.card{
+
+    padding:15px;
+
+}
+
+
+}
