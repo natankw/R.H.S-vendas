@@ -2,17 +2,27 @@ const SENHA_ADMIN = "10092008";
 
 
 let produtos = JSON.parse(
-    localStorage.getItem("produtos")
+localStorage.getItem("produtos")
+) || [];
+
+
+let pedidos = JSON.parse(
+localStorage.getItem("pedidos")
 ) || [];
 
 
 
-function salvarBanco(){
+function salvar(){
 
-    localStorage.setItem(
-        "produtos",
-        JSON.stringify(produtos)
-    );
+localStorage.setItem(
+"produtos",
+JSON.stringify(produtos)
+);
+
+localStorage.setItem(
+"pedidos",
+JSON.stringify(pedidos)
+);
 
 }
 
@@ -20,7 +30,7 @@ function salvarBanco(){
 
 function listarProdutos(){
 
-    return produtos;
+return produtos;
 
 }
 
@@ -28,26 +38,25 @@ function listarProdutos(){
 
 function buscarProduto(id){
 
-    return produtos.find(
-        item => item.id == id
-    );
+return produtos.find(
+p=>p.id==id
+);
 
 }
 
 
 
-function adicionarProduto(dados){
+function adicionarProduto(produto){
 
-    dados.id = Date.now();
+produto.id = Date.now();
 
-    dados.data = new Date()
-    .toLocaleDateString("pt-BR");
-
-
-    produtos.push(dados);
+produto.data =
+new Date().toLocaleDateString("pt-BR");
 
 
-    salvarBanco();
+produtos.push(produto);
+
+salvar();
 
 }
 
@@ -56,16 +65,16 @@ function adicionarProduto(dados){
 
 function editarProduto(id,dados){
 
-    const produto = buscarProduto(id);
+let p = buscarProduto(id);
 
 
-    if(produto){
+if(p){
 
-        Object.assign(produto,dados);
+Object.assign(p,dados);
 
-        salvarBanco();
+salvar();
 
-    }
+}
 
 }
 
@@ -74,11 +83,38 @@ function editarProduto(id,dados){
 
 function excluirProduto(id){
 
-    produtos = produtos.filter(
-        item => item.id != id
-    );
+produtos =
+produtos.filter(
+p=>p.id!=id
+);
 
 
-    salvarBanco();
+salvar();
+
+}
+
+
+
+
+
+function criarPedido(dados){
+
+dados.id=Date.now();
+
+dados.status="Pendente";
+
+
+pedidos.push(dados);
+
+
+salvar();
+
+}
+
+
+
+function listarPedidos(){
+
+return pedidos;
 
 }
