@@ -2,65 +2,130 @@ const area = document.getElementById("produtos");
 
 
 
-function carregarProdutos(){
+function mostrarProdutos(lista){
 
 
-    area.innerHTML = "";
-
-
-
-    listarProdutos().forEach(produto=>{
-
-
-        area.innerHTML += `
-
-
-        <div class="card">
-
-
-        <img src="${produto.imagem}" class="thumb">
+area.innerHTML="";
 
 
 
-        <h2>${produto.nome}</h2>
+if(lista.length === 0){
 
 
+area.innerHTML = `
 
-        <p>${produto.descricao}</p>
+<div class="card">
 
+<h2>Nenhum produto cadastrado</h2>
 
+</div>
 
-        <h3>
-        💰 R$ ${produto.preco}
-        </h3>
-
-
-
-        <a href="produto.html?id=${produto.id}">
+`;
 
 
-        <button>
-
-        Ver produto
-
-        </button>
-
-
-        </a>
-
-
-
-        </div>
-
-
-        `;
-
-
-    });
+return;
 
 
 }
 
 
 
-carregarProdutos();
+
+
+lista.forEach(produto=>{
+
+
+area.innerHTML += `
+
+
+<div class="card">
+
+
+<img src="${produto.imagem}" class="thumb">
+
+
+<h2>${produto.nome}</h2>
+
+
+
+<p>
+
+${produto.descricao}
+
+</p>
+
+
+
+<h3>
+
+💰 R$ ${produto.preco}
+
+</h3>
+
+
+
+<a href="produto.html?id=${produto.id}">
+
+<button>
+
+Ver produto
+
+</button>
+
+
+</a>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+}
+
+
+
+
+mostrarProdutos(
+listarProdutos()
+);
+
+
+
+
+
+
+
+document
+.getElementById("pesquisar")
+.addEventListener("input",function(){
+
+
+const texto =
+this.value.toLowerCase();
+
+
+
+const resultado =
+listarProdutos()
+.filter(produto =>
+
+produto.nome
+.toLowerCase()
+.includes(texto)
+
+);
+
+
+
+mostrarProdutos(resultado);
+
+
+
+});
