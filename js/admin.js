@@ -1,22 +1,26 @@
 let logado = false;
+
 let editando = null;
 
 
 
-function entrar(){
-
-    const senhaDigitada = document.getElementById("senha").value;
+function login(){
 
 
-    if(senhaDigitada === SENHA_ADMIN){
+    const senha = document.getElementById("senha").value;
+
+
+
+    if(senha === SENHA_ADMIN){
 
 
         logado = true;
 
 
-        document.getElementById("login").style.display = "none";
+        document.getElementById("loginBox").style.display="none";
 
-        document.getElementById("painel").style.display = "block";
+
+        document.getElementById("painel").style.display="block";
 
 
         listar();
@@ -35,14 +39,17 @@ function entrar(){
 
 
 
-function salvarProduto(){
+
+
+
+function salvar(){
 
 
     if(!logado) return;
 
 
 
-    const dados = {
+    const produto = {
 
 
         nome: document.getElementById("nome").value,
@@ -51,13 +58,20 @@ function salvarProduto(){
         imagem: document.getElementById("imagem").value,
 
 
+        categoria: document.getElementById("categoria").value,
+
+
         descricao: document.getElementById("descricao").value,
 
 
         preco: document.getElementById("preco").value,
 
 
-        whatsapp: document.getElementById("whatsapp").value
+        tipo: document.getElementById("tipo").value,
+
+
+        entrega: document.getElementById("entrega").value
+
 
 
     };
@@ -65,10 +79,11 @@ function salvarProduto(){
 
 
 
+
     if(editando){
 
 
-        editarProduto(editando,dados);
+        editarProduto(editando, produto);
 
 
         editando = null;
@@ -78,7 +93,7 @@ function salvarProduto(){
     }else{
 
 
-        adicionarProduto(dados);
+        adicionarProduto(produto);
 
 
     }
@@ -95,8 +110,8 @@ function salvarProduto(){
     listar();
 
 
-
 }
+
 
 
 
@@ -114,7 +129,8 @@ function listar(){
 
 
 
-    area.innerHTML = "";
+    area.innerHTML="";
+
 
 
 
@@ -126,19 +142,22 @@ function listar(){
         area.innerHTML += `
 
 
+
         <div class="card">
 
 
         <img src="${produto.imagem}" class="thumb">
 
 
+
         <h3>${produto.nome}</h3>
 
 
+
+        <p>${produto.categoria}</p>
+
+
         <p>💰 R$ ${produto.preco}</p>
-
-
-        <p>${produto.descricao}</p>
 
 
 
@@ -162,7 +181,8 @@ function listar(){
 
 
 
-        <button onclick="excluir(${produto.id})">
+
+        <button onclick="deletar(${produto.id})">
 
         🗑 Excluir
 
@@ -173,13 +193,16 @@ function listar(){
         </div>
 
 
+
         `;
+
 
 
     });
 
 
 }
+
 
 
 
@@ -203,17 +226,23 @@ function editar(id){
     document.getElementById("imagem").value = produto.imagem;
 
 
+    document.getElementById("categoria").value = produto.categoria;
+
+
     document.getElementById("descricao").value = produto.descricao;
 
 
     document.getElementById("preco").value = produto.preco;
 
 
-    document.getElementById("whatsapp").value = produto.whatsapp;
+    document.getElementById("tipo").value = produto.tipo;
+
+
+    document.getElementById("entrega").value = produto.entrega;
 
 
 
-    editando = id;
+    editando=id;
 
 
 }
@@ -224,7 +253,7 @@ function editar(id){
 
 
 
-function excluir(id){
+function deletar(id){
 
 
     if(confirm("Excluir produto?")){
@@ -247,6 +276,7 @@ function excluir(id){
 
 
 
+
 function limpar(){
 
 
@@ -255,4 +285,4 @@ function limpar(){
     .forEach(campo=>campo.value="");
 
 
-      }
+}
