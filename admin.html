@@ -19,20 +19,20 @@
 <div class="admin">
 
 
-<div id="login" class="box">
+<div id="loginBox" class="box">
 
 
-<h1>🔐 Admin</h1>
+<h1>🔐 Área Admin</h1>
 
 
 <input 
 id="senha"
 type="password"
-placeholder="Senha de acesso"
+placeholder="Senha"
 >
 
 
-<button onclick="entrar()">
+<button onclick="login()">
 Entrar
 </button>
 
@@ -46,7 +46,7 @@ Entrar
 <div id="painel" class="box" style="display:none;">
 
 
-<h1>🛒 Produtos</h1>
+<h1>🛒 Gerenciar Produtos</h1>
 
 
 
@@ -56,21 +56,76 @@ Entrar
 <input id="imagem" placeholder="Link da imagem">
 
 
-<textarea id="descricao" placeholder="Descrição"></textarea>
+
+<select id="categoria">
+
+<option>🎮 Jogos</option>
+
+<option>📱 Apps</option>
+
+<option>🔑 Chaves</option>
+
+<option>📚 Cursos</option>
+
+<option>🤖 Bots</option>
+
+<option>📦 Outros</option>
+
+</select>
 
 
-<input id="preco" placeholder="Preço">
 
 
-<input id="whatsapp" placeholder="WhatsApp para venda">
+<textarea 
+id="descricao"
+placeholder="Descrição do produto">
+</textarea>
 
 
 
-<button onclick="salvarProduto()">
 
-Adicionar produto
+<input 
+id="preco"
+placeholder="Preço exemplo: 10.00"
+>
+
+
+
+
+<select id="tipo">
+
+
+<option>
+Produto digital
+</option>
+
+
+<option>
+Serviço
+</option>
+
+
+</select>
+
+
+
+
+
+<input 
+id="entrega"
+placeholder="Entrega (link, instrução ou manual)"
+>
+
+
+
+
+
+<button onclick="salvar()">
+
+➕ Adicionar produto
 
 </button>
+
 
 
 
