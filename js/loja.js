@@ -1,29 +1,130 @@
 const area = document.getElementById("produtos");
 
-
-
-function mostrarProdutos(lista){
-
-
-area.innerHTML="";
+const busca = document.getElementById("pesquisar");
 
 
 
-if(lista.length === 0){
+let categoriaAtual = "Todos";
 
 
-area.innerHTML = `
-
-<div class="card">
-
-<h2>Nenhum produto cadastrado</h2>
-
-</div>
-
-`;
 
 
-return;
+
+
+function mostrarProdutos(){
+
+
+    area.innerHTML = "";
+
+
+
+    let produtos =
+    listarProdutos();
+
+
+
+    if(categoriaAtual !== "Todos"){
+
+
+        produtos =
+        produtos.filter(
+        p=>p.categoria === categoriaAtual
+        );
+
+
+    }
+
+
+
+
+
+    if(produtos.length === 0){
+
+
+        area.innerHTML = `
+
+        <div class="card">
+
+        <h2>
+        Nenhum produto encontrado
+        </h2>
+
+        </div>
+
+        `;
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    produtos.forEach(produto=>{
+
+
+        area.innerHTML += `
+
+
+        <div class="card">
+
+
+        <img 
+        src="${produto.imagem}"
+        class="thumb"
+        >
+
+
+
+        <h2>
+        ${produto.nome}
+        </h2>
+
+
+
+        <p>
+        ${produto.categoria}
+        </p>
+
+
+
+        <p>
+        ${produto.descricao.substring(0,80)}...
+        </p>
+
+
+
+        <h3>
+        💰 R$ ${produto.preco}
+        </h3>
+
+
+
+
+        <a href="produto.html?id=${produto.id}">
+
+        <button>
+
+        Ver produto
+
+        </button>
+
+        </a>
+
+
+
+        </div>
+
+
+        `;
+
+
+
+    });
+
 
 
 }
@@ -32,59 +133,17 @@ return;
 
 
 
-lista.forEach(produto=>{
-
-
-area.innerHTML += `
-
-
-<div class="card">
-
-
-<img src="${produto.imagem}" class="thumb">
-
-
-<h2>${produto.nome}</h2>
 
 
 
-<p>
-
-${produto.descricao}
-
-</p>
+function filtrar(categoria){
 
 
-
-<h3>
-
-💰 R$ ${produto.preco}
-
-</h3>
+    categoriaAtual = categoria;
 
 
+    mostrarProdutos();
 
-<a href="produto.html?id=${produto.id}">
-
-<button>
-
-Ver produto
-
-</button>
-
-
-</a>
-
-
-
-</div>
-
-
-`;
-
-
-
-});
 
 
 }
@@ -92,40 +151,44 @@ Ver produto
 
 
 
-mostrarProdutos(
-listarProdutos()
-);
 
 
 
 
+busca.addEventListener(
+"input",
+()=>{
+
+
+    let texto =
+    busca.value.toLowerCase();
 
 
 
-document
-.getElementById("pesquisar")
-.addEventListener("input",function(){
+    document
+    .querySelectorAll(".card")
+    .forEach(card=>{
 
 
-const texto =
-this.value.toLowerCase();
+        card.style.display =
+        card.innerText
+        .toLowerCase()
+        .includes(texto)
+
+        ? "block"
+
+        : "none";
 
 
-
-const resultado =
-listarProdutos()
-.filter(produto =>
-
-produto.nome
-.toLowerCase()
-.includes(texto)
-
-);
-
-
-
-mostrarProdutos(resultado);
-
+    });
 
 
 });
+
+
+
+
+
+
+
+mostrarProdutos();
