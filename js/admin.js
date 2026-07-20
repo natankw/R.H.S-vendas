@@ -1,4 +1,5 @@
 let logado = false;
+
 let editando = null;
 
 
@@ -17,12 +18,10 @@ function login(){
         logado = true;
 
 
+        document.getElementById("loginBox").style.display = "none";
 
-        document.getElementById("loginBox").style.display="none";
 
-
-        document.getElementById("painel").style.display="block";
-
+        document.getElementById("painel").style.display = "block";
 
 
         listarProdutosAdmin();
@@ -41,6 +40,7 @@ function login(){
 
 
 }
+
 
 
 
@@ -94,10 +94,14 @@ function salvar(){
     if(editando){
 
 
-        editarProduto(editando,produto);
+        editarProduto(
+        editando,
+        produto
+        );
 
 
-        editando=null;
+        editando = null;
+
 
 
     }else{
@@ -106,13 +110,14 @@ function salvar(){
         adicionarProduto(produto);
 
 
+
     }
 
 
 
 
-    alert("✅ Produto salvo");
 
+    alert("✅ Produto salvo");
 
 
     limpar();
@@ -139,16 +144,17 @@ function listarProdutosAdmin(){
 
 
 
-    if(!area)return;
+    if(!area) return;
 
 
 
-    area.innerHTML="";
+    area.innerHTML = "";
+
+
 
 
 
     listarProdutos().forEach(produto=>{
-
 
 
         area.innerHTML += `
@@ -178,12 +184,13 @@ function listarProdutosAdmin(){
 
         <a href="produto.html?id=${produto.id}" target="_blank">
 
-        🔗 Ver página
+        🔗 Abrir produto
 
         </a>
 
 
         <br><br>
+
 
 
 
@@ -200,6 +207,7 @@ function listarProdutosAdmin(){
         🗑 Excluir
 
         </button>
+
 
 
         </div>
@@ -229,30 +237,44 @@ function editar(id){
 
 
 
-    if(!produto)return;
+    if(!produto) return;
 
 
 
-    document.getElementById("nome").value = produto.nome;
-
-    document.getElementById("imagem").value = produto.imagem;
-
-    document.getElementById("categoria").value = produto.categoria;
-
-    document.getElementById("descricao").value = produto.descricao;
-
-    document.getElementById("preco").value = produto.preco;
-
-    document.getElementById("tipo").value = produto.tipo;
-
-    document.getElementById("entrega").value = produto.entrega;
+    document.getElementById("nome").value =
+    produto.nome;
 
 
+    document.getElementById("imagem").value =
+    produto.imagem;
 
-    editando=id;
+
+    document.getElementById("categoria").value =
+    produto.categoria;
+
+
+    document.getElementById("descricao").value =
+    produto.descricao;
+
+
+    document.getElementById("preco").value =
+    produto.preco;
+
+
+    document.getElementById("tipo").value =
+    produto.tipo;
+
+
+    document.getElementById("entrega").value =
+    produto.entrega;
+
+
+
+    editando = id;
 
 
 }
+
 
 
 
@@ -292,7 +314,7 @@ function listarPedidosAdmin(){
 
 
 
-    if(!area)return;
+    if(!area) return;
 
 
 
@@ -301,21 +323,30 @@ function listarPedidosAdmin(){
 
 
 
-    area.innerHTML="";
+    area.innerHTML = "";
+
 
 
 
     if(pedidos.length === 0){
 
 
-        area.innerHTML =
-        "<p>Nenhum pedido ainda.</p>";
+        area.innerHTML = `
+
+        <div class="card">
+
+        📭 Nenhum pedido
+
+        </div>
+
+        `;
 
 
         return;
 
 
     }
+
 
 
 
@@ -331,8 +362,21 @@ function listarPedidosAdmin(){
 
 
         <h3>
-        🛒 ${pedido.nome}
+        📦 ${pedido.produto}
         </h3>
+
+
+
+        <p>
+        👤 ${pedido.cliente}
+        </p>
+
+
+
+        <p>
+        📱 ${pedido.whatsapp}
+        </p>
+
 
 
         <p>
@@ -340,9 +384,37 @@ function listarPedidosAdmin(){
         </p>
 
 
+
         <p>
-        Status: ${pedido.status}
+        📅 ${pedido.data}
         </p>
+
+
+
+        <p>
+        🔄 ${pedido.status}
+        </p>
+
+
+
+        <a href="https://wa.me/55${pedido.whatsapp}" target="_blank">
+
+        <button>
+
+        💬 WhatsApp
+
+        </button>
+
+        </a>
+
+
+
+        <button onclick="entregue(${pedido.id})">
+
+        ✅ Entregue
+
+        </button>
+
 
 
         </div>
@@ -351,9 +423,52 @@ function listarPedidosAdmin(){
         `;
 
 
-
     });
 
+
+
+}
+
+
+
+
+
+
+
+
+function entregue(id){
+
+
+    let pedidos =
+    pegarPedidos();
+
+
+
+    let pedido =
+    pedidos.find(
+    p=>p.id == id
+    );
+
+
+
+    if(pedido){
+
+
+        pedido.status = "Entregue";
+
+
+
+        localStorage.setItem(
+        "pedidos",
+        JSON.stringify(pedidos)
+        );
+
+
+
+        listarPedidosAdmin();
+
+
+    }
 
 
 }
@@ -372,45 +487,11 @@ function limpar(){
     .querySelectorAll("input, textarea")
     .forEach(campo=>{
 
+
         campo.value="";
 
+
     });
-
-
-        }
-
-function entregue(id){
-
-
-    let pedidos = pegarPedidos();
-
-
-    let pedido = pedidos.find(
-    p=>p.id == id
-    );
-
-
-    if(pedido){
-
-
-        pedido.status="Entregue";
-
-
-        localStorage.setItem(
-        "pedidos",
-        JSON.stringify(pedidos)
-        );
-
-
-        alert(
-        "✅ Pedido atualizado"
-        );
-
-
-        listarPedidosAdmin();
-
-
-    }
 
 
 }
