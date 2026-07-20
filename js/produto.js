@@ -18,7 +18,7 @@ if(!produto){
 
     <div class="card">
 
-    <h1>❌ Produto não encontrado</h1>
+        <h1>❌ Produto não encontrado</h1>
 
     </div>
 
@@ -40,9 +40,11 @@ if(!produto){
         >
 
 
+
         <h1>
         ${produto.nome}
         </h1>
+
 
 
         <p>
@@ -58,14 +60,24 @@ if(!produto){
 
 
         <p>
-        📂 Categoria: ${produto.categoria}
+        📂 Categoria:
+        ${produto.categoria}
         </p>
 
 
 
         <p>
-        📦 Tipo: ${produto.tipo}
+        📦 Tipo:
+        ${produto.tipo}
         </p>
+
+
+
+        <p>
+        🚚 Entrega:
+        ${produto.entrega}
+        </p>
+
 
 
 
@@ -74,6 +86,7 @@ if(!produto){
         🛒 Comprar agora
 
         </button>
+
 
 
     </div>
@@ -89,19 +102,28 @@ if(!produto){
 
 
 
+
+
 function comprar(){
 
 
-    const dados = {
+    const pedido = {
 
 
-        id: produto.id,
+        produtoId: produto.id,
 
 
         nome: produto.nome,
 
 
-        preco: produto.preco
+        preco: produto.preco,
+
+
+        data:
+        new Date().toLocaleDateString("pt-BR"),
+
+
+        status:"Pendente"
 
 
 
@@ -110,61 +132,16 @@ function comprar(){
 
 
 
-    fetch("http://localhost:3000/criar-pagamento",{
 
-
-        method:"POST",
-
-
-        headers:{
-
-
-            "Content-Type":"application/json"
-
-
-        },
-
-
-        body: JSON.stringify(dados)
+    criarPedido(pedido);
 
 
 
-    })
 
 
-
-    .then(res=>res.json())
-
-
-    .then(data=>{
-
-
-        console.log(data);
-
-
-
-        alert(
-        "✅ Pedido enviado para pagamento"
-        );
-
-
-    })
-
-
-
-    .catch(error=>{
-
-
-        console.log(error);
-
-
-
-        alert(
-        "❌ Servidor de pagamento offline"
-        );
-
-
-    });
+    alert(
+    "✅ Pedido criado! Aguarde a confirmação."
+    );
 
 
 
